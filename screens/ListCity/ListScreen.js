@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 
 class ListScreen extends React.Component {
     getCity(){
-        let view = <Text>"you not have city"</Text>;
+        let view = <Text style={styles.text}>you not have city</Text>;
         if(this.props.state.city.workCity.length > 0){
             view = this.props.state.city.workCity.map( item =>
                 <ItemList city={item}></ItemList>
@@ -28,7 +28,13 @@ function mapStateToProps(state) {
     }
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+    text:{
+        color:"white",
+        textAlign:"center"
+    },
+
+});
 
 export default connect(mapStateToProps)(ListScreen);
 

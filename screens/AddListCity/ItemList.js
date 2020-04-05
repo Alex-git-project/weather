@@ -4,20 +4,16 @@ import {connect} from "react-redux";
 import {setCity} from "../../src/redusers/CityReducer";
 
 
-
 class ItemList extends React.Component {
-    render(){
+    render() {
         return (
-            <View style={styles.block}>
-                <View>
-                    <Text style={styles.text}>
-                        {this.props.city}
-                    </Text>
-                </View>
-                <View>
-                    <Button title="add City" onPress={()=>{this.props.dispatch(setCity(this.props.city))}}/>
-                </View>
-            </View>
+            <TouchableOpacity style={styles.block} onPress={() => {
+                this.props.event(this.props.city)
+            }}>
+                <Text style={styles.text}>
+                    {this.props.city}
+                </Text>
+            </TouchableOpacity>
         );
     }
 }
@@ -25,15 +21,15 @@ class ItemList extends React.Component {
 
 const styles = StyleSheet.create({
     block: {
-        borderRadius: 10,
-        borderWidth: 2,
-        borderColor: 'white',
-        fontSize: 30,
-        height: 80,
-        padding:20,
+        fontSize: 20,
+        height: 60,
+        padding: 10,
         marginTop: 5,
-        flexDirection:"row",
-        justifyContent:'space-between'
+        flexDirection: "row",
+        justifyContent: 'space-between',
+        width: 100 + "%",
+        borderBottomWidth: 2,
+        borderBottomColor: 'black'
     },
     text: {
         fontSize: 20,

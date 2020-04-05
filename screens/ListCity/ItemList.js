@@ -22,9 +22,8 @@ class ItemList extends React.Component {
 
 const styles = StyleSheet.create({
     block: {
-        borderRadius: 10,
-        borderWidth: 2,
-        borderColor: 'white',
+        borderBottomWidth: 2,
+        borderBottomColor: 'white',
         fontSize: 30,
         height: 80,
         padding:20,

@@ -11,32 +11,14 @@ import {
     TextInput
 } from 'react-native'
 import ListScreen from "./ListCity/ListScreen";
-import InputSearch from "../src/components/InputSearch";
+
 
 function StartScreen({navigation}) {
     const [modalVisible, setModalVisible] = useState(false);
     return (
-        <ImageBackground source={require('../img/fyCe.gif')} style={{flex: 1}} imageStyle={{resizeMode: 'stretch'}}>
-            <Modal
-                animationType="slide"
-                transparent={true}
-                visible={modalVisible}
-            >
-                <View style={styles.centeredView}>
-                    <View style={styles.modalView}>
-                        <InputSearch />
-                        <TouchableHighlight style={styles.closeButton} onPress={() => {
-                            setModalVisible(!modalVisible)
-                        }}>
-                            <Text style={styles.textStyle}>Close</Text>
-                        </TouchableHighlight>
-                    </View>
-                </View>
-            </Modal>
-            <Button title={"search"} onPress={() => {
-                setModalVisible(true)
-            }}/>
+        <ImageBackground source={require('../img/P2E.gif')} style={{flex: 1}} imageStyle={{resizeMode: 'stretch'}}>
             <ListScreen/>
+            <Button title={"search"} onPress={() => navigation.navigate('addList')}/>
         </ImageBackground>
     );
 }
@@ -52,7 +34,7 @@ const styles = StyleSheet.create({
         backgroundColor: "white",
         borderRadius: 20,
         padding: 35,
-        alignItems: "center",
+        //alignItems: "center",
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -75,11 +57,12 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         elevation: 2,
         color: "white",
-        width: 30 + "%",
         paddingStart: 5,
         paddingEnd: 5,
         paddingTop: 10,
-        paddingBottom: 10
+        paddingBottom: 10,
+        height: 40,
+        width: 90
     },
     textStyle: {
         color: "white",
