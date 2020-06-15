@@ -1,13 +1,12 @@
-import * as React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import {createStore,combineReducers} from "redux";
-import ImgReducer from "./redusers/ImgReducer";
+import {createStore, combineReducers} from "redux";
+import WeatherReducer from "./redusers/WeatherReducer";
 import CityReducer from "./redusers/CityReducer";
 
 const reducers = combineReducers({
-    city:CityReducer
+    city: CityReducer,
+    weather: WeatherReducer
 });
 
-const store = createStore(reducers)
+const store = createStore(reducers);
 
 export default store
