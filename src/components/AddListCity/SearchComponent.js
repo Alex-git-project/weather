@@ -41,7 +41,7 @@ class SearchComponent extends React.Component {
 
     onClickItem=(city)=>{
         this.props.dispatch(setCity(city));
-        this.props.navigation.navigate("Home")
+        this.props.navigation.navigate("Головна сторінка")
     };
 
     componentWillUnmount(){

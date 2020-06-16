@@ -34,12 +34,12 @@ const ItemList = (props) => {
     let openCity = () => {
         if (!disable) {
             dispatch(addCity(props.city));
-            props.navigation.navigate('cities');
+            props.navigation.navigate('Детальна інформація');
         }
     };
 
     const deleteItem = () => {
-        dispatch(deleteValueApi(props.city))
+        dispatch(deleteValueApi(props.city));
         dispatch(deleteCity(props.city));
     };
 

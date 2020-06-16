@@ -1,0 +1,16 @@
+export const ADD_CITY = "ADD-CITY";
+export const SEARCH_CITY = "SEARCH-CITY";
+export const SET_INPUT_SEARCH = "SET-INPUT-SEARCH";
+export const CLEAR_MASS_SEARCH = "CLEAR-MASS-SEARCH";
+export const CLEAR_INPUT_SEARCH = "CLEAR-INPUT-SEARCH";
+export const DELETE_CITY = "DELETE-CITY";
+export const SET_ALL_CITY = "SET-ALL-CITY";
+export const INITIAL_CITY = "INITIAL-CITY";
+
+export const ADD_CITY_DATA = "SET-CITY";
+export const ADD_CITY_VALUE_MAP_API = "ADD-CITY-VALUE-MAP-API";
+export const ADD_CITY_VALUE_GRID_API = "ADD-CITY-VALUE-GRID-API";
+export const SET_TYPE_TEMP = "SET-TYPE-TEMP";
+export const DELETE_CITY_VALUE = "DELETE-CITY-VALUE";
+
+

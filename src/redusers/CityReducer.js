@@ -1,21 +1,24 @@
 import * as React from 'react';
+import * as actionType from './actionsTypes';
+import {setStorage} from '../../common/setStorage'
 
-const ADD_CITY = "ADD-CITY";
-const SEARCH_CITY = "SEARCH-CITY";
-const SET_INPUT_SEARCH = "SET-INPUT-SEARCH";
-const CLEAR_MASS_SEARCH = "CLEAR-MASS-SEARCH";
-const CLEAR_INPUT_SEARCH = "CLEAR-INPUT-SEARCH";
-const DELETE_CITY = "DELETE-CITY";
-const SET_ALL_CITY = "SET-ALL-CITY";
-
-let initialState = {
+const initialState = {
     inputSearch:"",
     workCity:[],
     searchCity:[],
     listAllCity:[]
 };
 
-let filterCity = (state) => {
+export const setCity = (payload) => ({type: actionType.ADD_CITY,payload});
+export const searchCity = () => ({type: actionType.SEARCH_CITY});
+export const clearMassSearch = () => ({type: actionType.CLEAR_MASS_SEARCH});
+export const clearInput = () => ({type: actionType.CLEAR_INPUT_SEARCH});
+export const setInputSearch = (payload) => ({type: actionType.SET_INPUT_SEARCH,payload});
+export const deleteCity = (payload) => ({type: actionType.DELETE_CITY,payload});
+export const setAllCity = (payload) => ({type: actionType.SET_ALL_CITY,payload});
+export const initialCity = (payload) => ({type: actionType.INITIAL_CITY,payload});
+
+const filterCity = (state) => {
     let nameCity = state.inputSearch;
     nameCity = nameCity[0].toUpperCase() + nameCity.slice(1);
     let data = Object.values(state.listAllCity).flat();
@@ -23,44 +26,48 @@ let filterCity = (state) => {
     return currentValues
 };
 
-const CityReducer =(state = initialState, action) => {
-    if (action.type === "ADD-CITY") {
-        let mass = state.workCity || [];
-        if(mass.find(item => item === action.payload)){
-            return state
-        }else if(state.workCity.length > 5) {
-            return state
-        }
-        else {
-            mass.push(action.payload);
-            return {...state, workCity: mass};
-        }
-    } else if (action.type === "SEARCH-CITY") {
-        return {...state, searchCity: filterCity(state)};
-    }else if (action.type === "DELETE-CITY") {
-        const index = state.workCity.indexOf(action.payload);
-        const updatedCity = state.workCity;
-        updatedCity.splice(index,1);
-        return {...state, workCity: updatedCity};
-    }else if (action.type === "SET-INPUT-SEARCH") {
-        return {...state, inputSearch: action.payload};
-    }else if (action.type === "CLEAR-MASS-SEARCH") {
-        return {...state, searchCity: []}
-    }else if (action.type === "CLEAR-INPUT-SEARCH") {
-        return {...state, inputSearch: ""}
-    }else if (action.type === "SET-ALL-CITY") {
-        return {...state, listAllCity: action.payload}
-    } else {
+const addCityFunction = (payload , state) => {
+    let mass = state.workCity || [];
+    if(mass.find(item => item === payload)){
         return state
+    }else if(state.workCity.length > 5) {
+        return state
+    }
+    else {
+        mass.push(payload);
+        setStorage(mass);
+        return {...state, workCity: mass};
     }
 };
 
-export const setCity = (payload) => ({type: ADD_CITY,payload});
-export const searchCity = () => ({type: SEARCH_CITY});
-export const clearMassSearch = () => ({type: CLEAR_MASS_SEARCH});
-export const clearInput = () => ({type: CLEAR_INPUT_SEARCH});
-export const setInputSearch = (payload) => ({type: SET_INPUT_SEARCH,payload});
-export const deleteCity = (payload) => ({type: DELETE_CITY,payload});
-export const setAllCity = (payload) => ({type: SET_ALL_CITY,payload});
+const deleteFunction = (payload, state) => {
+    const index = state.workCity.indexOf(payload);
+    const updatedCity = state.workCity;
+    updatedCity.splice(index,1);
+    setStorage(updatedCity);
+    return {...state, workCity: updatedCity};
+};
+
+const CityReducer =(state = initialState, action) => {
+    switch(action.type) {
+        case "ADD-CITY":
+            return addCityFunction(action.payload, state);
+        case "SEARCH-CITY":
+            return {...state, searchCity: filterCity(state)};
+        case "DELETE-CITY":
+            return deleteFunction(action.payload, state);
+        case "SET-INPUT-SEARCH":
+            return {...state, inputSearch: action.payload};
+        case "CLEAR-MASS-SEARCH":
+            return {...state, searchCity: []};
+        case "SET-ALL-CITY":
+            return {...state, listAllCity: action.payload};
+        case "INITIAL-CITY":
+            return {...state, workCity: action.payload};
+        default:
+            return state
+    }
+};
+
 
 export default CityReducer

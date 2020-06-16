@@ -18,9 +18,9 @@ function AppNavigation() {
 
     return (<NavigationContainer>
         <Stack.Navigator>
-            <Stack.Screen name="Home" component={Start} />
-            <Stack.Screen name="addList" component={SearchComponentTab} />
-            <Stack.Screen name="cities" component={createBottomTabs} />
+            <Stack.Screen name="Головна сторінка" component={Start} />
+            <Stack.Screen name="Пошук" component={SearchComponentTab} />
+            <Stack.Screen name="Детальна інформація" component={createBottomTabs} />
         </Stack.Navigator>
         </NavigationContainer>
     );

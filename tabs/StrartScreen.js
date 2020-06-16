@@ -16,7 +16,8 @@ import SecondWeatherApi from "../src/service/fetchGridForecast"
 import {setValueCityGridApi, setValueCityMapApi} from "../src/redusers/WeatherReducer";
 import {setTypeTemp} from "../src/redusers/WeatherReducer";
 import Swipeable from 'react-native-swipeable';
-import {setAllCity} from "../src/redusers/CityReducer";
+import {initialCity, setAllCity} from "../src/redusers/CityReducer";
+import {getStorage} from '../common/setStorage'
 
 function StartScreen({navigation}) {
     const [modalVisible, setModalVisible] = useState(false);
@@ -61,7 +62,8 @@ function StartScreen({navigation}) {
 
     useEffect(() => {
         getСoordinates(setModalVisible);
-        getListCity()
+        getListCity();
+        getStorage(dispatch);
     }, []);
 
     useEffect(() => {
@@ -102,7 +104,7 @@ function StartScreen({navigation}) {
                 </TouchableHighlight>
 
                 <TouchableHighlight style={styles.textStyle} onPress={() => {
-                    navigation.navigate('addList');
+                    navigation.navigate('Пошук');
                 }}>
                     <Text style={styles.textStyle}>
                         Search

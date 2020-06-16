@@ -1,7 +1,6 @@
 import React from "react";
 import {
     ImageBackground,
-    StyleSheet,
     TouchableOpacity,
     View,
     Text,
@@ -36,9 +35,12 @@ export default function DetailsCity() {
     const currentTemp = temp(currentCity);
     const DATA = [];
     const {initialWeatherForecast, typeWeather} = getCurrentWeather(currentCity);
-    const typeAnimation = typeWeather.type === 'Snow' ?
-        <AnimationWeather typeWeather={typeSnow}/> :
-        <AnimationWeather typeWeather={typeRain}/>;
+
+    const typeAnimation = () => {
+        if(typeWeather.type === 'Snow') return <AnimationWeather typeWeather={typeSnow}/> ;
+        if(typeWeather.type === 'Rain') return <AnimationWeather typeWeather={typeRain}/>;
+        return null
+    };
 
     for (let key in initialWeatherForecast) {
         if (initialWeatherForecast.hasOwnProperty(key)) {
@@ -71,6 +73,14 @@ export default function DetailsCity() {
         );
     };
 
+    const typeImg = (typeWether) => {
+        if(typeWether === 'Rain') return <Image style={styles.iconBox} source={require('../img/rain.gif')}/>;
+        if(typeWether === 'Clouds') return <Image style={styles.iconBox} source={require('../img/cloud.gif')}/>;
+        if(typeWether === 'Clear') return <Image style={styles.iconBox} source={require('../img/clear.gif')}/>;
+        if(typeWether === 'Snow') return <Image style={styles.iconBox} source={require('../img/clear.gif')}/>;
+        return <Image style={styles.iconBox} source={require('../img/clear.gif')}/>;
+    };
+
     const renderWeather =
         <>
             <View style={styles.header}>
@@ -95,7 +105,7 @@ export default function DetailsCity() {
             </View>
             <View></View>
             <View style={styles.scrollBox}>
-                <Image style={styles.iconBox} source={require('../img/68J.gif')}/>
+                {typeImg(typeWeather.type)}
                 <View style={styles.list}>
                     {renderList()}
                 </View>
@@ -109,7 +119,7 @@ export default function DetailsCity() {
             source={require('../img/21185-biom-gora-dnevnoe_vremya-iskusstvo-pejzazhi_gor-1080x1920.jpg')}
         >
             {renderWeather}
-            {typeAnimation}
+            {typeAnimation()}
         </ImageBackground>
     );
 }
